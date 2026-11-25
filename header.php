@@ -51,6 +51,16 @@ if (isset($id_user)) {
 }
 
 // Dev grade override (localhost only), mirrors ATEM's atem_dev_role_override pattern.
+// Re-checked here too (same rule as dev-switch-role.php/navbar.php), so an
+// override can never take effect on a non-local request even if one somehow
+// ended up in the session.
+$_okr_dev_remote = $_SERVER['REMOTE_ADDR'] ?? '';
+$_okr_dev_host   = strtolower(preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? ''));
+$_okr_dev_local  = in_array($_okr_dev_remote, ['127.0.0.1', '::1'], true)
+    && in_array($_okr_dev_host, ['localhost', '127.0.0.1', '[::1]'], true);
+if (!$_okr_dev_local) {
+    unset($_SESSION['okr_dev_role_override']);
+}
 if (isset($_SESSION['okr_dev_role_override'])) {
     $okr_permission = (int)$_SESSION['okr_dev_role_override'];
     $okr_is_admin = false;

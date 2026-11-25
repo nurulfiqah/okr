@@ -12,13 +12,14 @@ if (session_id() == '') {
     session_start();
 }
 
-// Restrict to localhost only
-$serverName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
-$httpHost   = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-$isLocal    = in_array($serverName, array('localhost', '127.0.0.1'))
-    || strpos($serverName, 'localhost') !== false
-    || strpos($httpHost, 'localhost') !== false
-    || strpos($httpHost, '127.0.0.1') !== false;
+// Restrict to localhost only. REMOTE_ADDR is the real connecting IP (set by
+// the server, not the client); the Host header alone is client-controlled and
+// could be spoofed on production ("Host: localhost"), so both must agree.
+// Same check as navbar.php's dev grade bar - keep the two in sync.
+$remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
+$hostOnly   = strtolower(preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? ''));
+$isLocal    = in_array($remoteAddr, ['127.0.0.1', '::1'], true)
+    && in_array($hostOnly, ['localhost', '127.0.0.1', '[::1]'], true);
 
 if (!$isLocal) {
     http_response_code(403);
@@ -48,8 +49,11 @@ $redirect = isset($_POST['redirect']) && $_POST['redirect'] !== ''
     ? $_POST['redirect']
     : '/odb/okr/index.php';
 
-// Only allow relative redirects to prevent open redirect
-if (strpos($redirect, '://') !== false) {
+// Only allow same-site absolute paths ("/odb/..."), to prevent an open
+// redirect - rejects full URLs ("https://x"), protocol-relative ("//x") and
+// backslash variants ("/\x") that browsers also treat as another host.
+if (!preg_match('#^/(?![/\\\\])#', $redirect) || strpos($redirect, '://') !== false
+    || preg_match('/[\r\n]/', $redirect)) {
     $redirect = '/odb/okr/index.php';
 }
 

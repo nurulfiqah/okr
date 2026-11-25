@@ -1,10 +1,11 @@
 <?php
-$_navbar_serverName = $_SERVER['SERVER_NAME'] ?? '';
-$_navbar_httpHost   = $_SERVER['HTTP_HOST'] ?? '';
-$_navbar_isLocal    = in_array($_navbar_serverName, ['localhost', '127.0.0.1'])
-    || strpos($_navbar_serverName, 'localhost') !== false
-    || strpos($_navbar_httpHost,   'localhost') !== false
-    || strpos($_navbar_httpHost,   '127.0.0.1') !== false;
+// Dev grade bar is localhost-only. Same check as dev-switch-role.php (keep in
+// sync): the real connecting IP must be loopback AND the Host must be a local
+// name - the Host header alone is client-controlled and spoofable.
+$_navbar_remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
+$_navbar_hostOnly   = strtolower(preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? ''));
+$_navbar_isLocal    = in_array($_navbar_remoteAddr, ['127.0.0.1', '::1'], true)
+    && in_array($_navbar_hostOnly, ['localhost', '127.0.0.1', '[::1]'], true);
 
 $_navbar_realIsAdmin = false;
 if ($_navbar_isLocal && isset($id_user)) {
