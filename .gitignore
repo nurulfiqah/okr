@@ -1,0 +1,21 @@
+# --- Credentials / secrets: never commit ---
+# Real MAIL_* and NAS_* values live only here (see mailer.php / nas_config.php).
+.env
+.env.*
+!.env.example
+# Optional local mail override (Mailtrap etc.), see mailer.php.
+mail_config.local.php
+*.local.php
+# Keys / certificates / credential files, if any are ever dropped in.
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+
+# --- Generated / local-only ---
+/vendor/
+/logs
+# Claude Code's local per-machine state.
+/.claude/

@@ -1,0 +1,1609 @@
+/* OKR Module - Base Layout Styles */
+/* Custom classes use the okr- prefix. Visual language mirrors the ATEM module. */
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fa;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* The shared ODB site-wide stylesheet centers body text by default, which
+   leaks into anything rendered outside .okr-container (Bootstrap modals are
+   appended straight to <body>). Force left alignment for modal content. */
+.modal-body,
+.modal-header,
+.modal-footer {
+  text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+input, select, textarea, button {
+  font-family: "Inter", sans-serif;
+}
+
+.headerH1 {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 600 !important;
+}
+
+.okr-container,
+.okr-container * {
+  font-family: "Inter", sans-serif;
+}
+
+/* ---------------------------------------------------------------
+   Navigation Bar
+--------------------------------------------------------------- */
+.okr-nav {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(19, 92, 170, 0.1);
+  padding: 0.5rem 1rem;
+}
+
+.okr-nav .navbar-nav {
+  gap: 0.5rem;
+}
+
+.okr-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  padding: 0 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.okr-nav .nav-link:hover {
+  color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.okr-nav .nav-link.active {
+  color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.1);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------
+   Main Container - ODB Integration
+--------------------------------------------------------------- */
+.okr-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 25px 35px 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(19, 92, 170, 0.1);
+  /* The shared ODB site-wide stylesheet centers body text by default;
+     override it here at the container level so every page under okr/
+     defaults to left-aligned regardless of per-element overrides. */
+  text-align: left;
+}
+
+.okr-page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #212529;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.okr-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  text-align: left;
+}
+
+.okr-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.okr-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #212529;
+  text-align: left;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.okr-card-title .bi {
+  color: #0a5aa8;
+  font-size: 16px;
+}
+
+.okr-card-hint {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 6px 0 0;
+  text-align: left;
+}
+
+.okr-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.okr-card-title-row .okr-card-title {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ---------------------------------------------------------------
+   Shared form / button styles
+--------------------------------------------------------------- */
+.btn {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  border-radius: 6px;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+  border-radius: 6px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 12px;
+  color: #495057;
+  text-align: left;
+  display: block;
+}
+
+.form-control,
+.form-select {
+  border-radius: 6px;
+  border-color: #ced4da;
+  font-size: 14px;
+  font-weight: 400;
+  height: 38px;
+  padding: 0.375rem 0.75rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control[readonly],
+.form-control:disabled,
+.form-select:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+textarea.form-control {
+  height: auto;
+}
+
+/* ---------------------------------------------------------------
+   Filter row (dashboard) - compact, fits one row, wraps on small
+   screens instead of stretching each field to a grid column width.
+--------------------------------------------------------------- */
+.okr-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.4rem 0.6rem;
+}
+
+/* Grid-based filter card (list.php, mirrors atem-filter) - fixed number of
+   equal columns per row instead of the flex-grow layout above. */
+.okr-filter .form-select,
+.okr-filter .form-control,
+.okr-filter .btn {
+  font-size: 13px;
+}
+
+.okr-filter .form-label {
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.okr-filter-item {
+  flex: 1 1 0;
+  min-width: 130px;
+}
+
+.okr-filter-item .form-label {
+  font-size: 11px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.okr-filter-item .form-select,
+.okr-filter-item .form-control {
+  width: 100%;
+  font-size: 13px;
+}
+
+.okr-filter-item--dept {
+  min-width: 130px;
+}
+
+.okr-filter-item--btns {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.okr-filter-item--btns .btn {
+  height: 38px;
+  font-size: 13px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.okr-filter-btns-divider {
+  width: 1px;
+  height: 22px;
+  background-color: #dee2e6;
+  margin: 0 0.2rem;
+  align-self: center;
+}
+
+@media (max-width: 576px) {
+  .okr-filter-item .form-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .okr-filter-item,
+  .okr-filter-item--dept,
+  .okr-filter-item--btns {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Bento layout (create / view forms)
+--------------------------------------------------------------- */
+.okr-bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.okr-bento-item {
+  grid-column: span 12;
+  min-width: 0;
+}
+
+.okr-span-8 {
+  grid-column: span 8;
+}
+
+.okr-span-4 {
+  grid-column: span 4;
+}
+
+.okr-span-12 {
+  grid-column: span 12;
+}
+
+.okr-req {
+  color: #dc3545;
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+/* Star rating (0-5, half-star steps). Read-only display everywhere;
+   CFG.canRate (CEO/admin) additionally get clickable half-star hit zones
+   overlaid on each star, wired in js/view.js. */
+.okr-star-rating {
+  margin-top: 4px;
+}
+
+.okr-star-display {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.okr-star {
+  position: relative;
+  display: inline-block;
+  flex: 1 1 0;
+  text-align: center;
+  font-size: 40px;
+  line-height: 1;
+  color: #f5a623;
+}
+
+.okr-star-hit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  cursor: pointer;
+}
+
+.okr-star-hit-left {
+  left: 0;
+}
+
+.okr-star-hit-right {
+  right: 0;
+}
+
+/* Owner(s) ARCI-style tagging widget (single "A - Accountable" role, max 2) */
+.okr-arci-add {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0 16px;
+}
+
+.okr-arci-add-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.okr-arci-add-grid-3 {
+  grid-template-columns: 1fr 1.2fr 1fr;
+}
+
+.okr-arci-add-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#okr-owner-dept-select {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 120px;
+  padding: 4px;
+}
+
+#okr-owner-dept-select option {
+  padding: 6px 8px;
+}
+
+.okr-arci-staff-list {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 8px;
+  height: 150px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.okr-arci-staff-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.okr-arci-col {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.okr-arci-col-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 13px;
+}
+
+.okr-arci-members {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 60px;
+}
+
+.okr-arci-member {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.okr-arci-member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.okr-arci-member-dept {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.okr-arci-member-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #212529;
+  word-break: break-word;
+}
+
+.okr-arci-remove {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.okr-arci-empty {
+  font-size: 12px;
+  color: #adb5bd;
+  font-style: italic;
+  text-align: center;
+  padding: 12px 0;
+}
+
+@media (max-width: 768px) {
+  .okr-arci-add-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Searchable / checkbox dropdown ("s2-lite") - mirrors ATEM's
+   vf-issuer-wrap/vf-s2-* widget. Used for Staff/Owner/Issuer
+   (searchable single-select) and Status (checkbox multi-select).
+--------------------------------------------------------------- */
+.okr-s2-wrap {
+  position: relative;
+}
+
+.okr-s2-selection {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 38px;
+  padding-left: 0.5rem;
+  padding-right: 2.25rem;
+  font-size: 13px;
+  font-weight: 400;
+  color: #212529;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.okr-s2-selection:focus,
+.okr-s2-selection:hover {
+  outline: none;
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.okr-s2-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  z-index: 9999;
+  display: none;
+}
+
+.okr-s2-dropdown.open {
+  display: block;
+}
+
+.okr-s2-search-wrap {
+  padding: 6px 6px 4px;
+}
+
+.okr-s2-search {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 4px 8px;
+  outline: none;
+}
+
+.okr-s2-search:focus {
+  border-color: #86b7fe;
+}
+
+.okr-s2-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.okr-s2-list li {
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.okr-s2-list li:hover,
+.okr-s2-list li.active {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.okr-s2-list li.hidden {
+  display: none;
+}
+
+.okr-dash-scroll-table {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.okr-dash-scroll-table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.okr-s2-empty {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Read-only Suspend/Appeal Reason display (view.php's CEO Action/Appeal
+   Suspension cards, edit.php's mirror of the same) - a long reason scrolls
+   inside this box instead of stretching the whole card down the page. */
+.okr-reason-box {
+  font-size: 13px;
+  white-space: pre-wrap;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  background-color: #f9f9fb;
+}
+
+/* Inline form error (small red text instead of system dialogs) */
+.okr-form-error {
+  font-size: 12px;
+  color: #dc3545;
+  margin-top: 6px;
+  min-height: 0;
+}
+
+.okr-save-error-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.okr-save-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.okr-empty-state {
+  font-size: 12px;
+  color: #adb5bd;
+  font-style: italic;
+  padding: 6px 0;
+}
+
+/* Pager (list.php) - mirrors atem/css/style.css's .atem-pager* exactly */
+.okr-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.okr-pager-bar {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.okr-pager-btn {
+  border: 1px solid #ced4da;
+  background: #ffffff;
+  color: #495057;
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.okr-pager-btn:hover:not(:disabled) {
+  background: #eef6ff;
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.okr-pager-btn.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
+}
+
+.okr-pager-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.okr-pager-gap {
+  padding: 0 4px;
+  color: #adb5bd;
+}
+
+.okr-pager-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #495057;
+}
+
+.okr-perpage-select {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 3px 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.okr-pager-info {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* ---------------------------------------------------------------
+   Audit Log
+--------------------------------------------------------------- */
+.okr-activity-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.okr-activity-row {
+  border-left: 3px solid #dee2e6;
+  padding: 4px 0 4px 10px;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.okr-activity-summary {
+  font-size: 12px;
+  color: #212529;
+}
+
+.okr-activity-meta {
+  font-size: 10px;
+  color: #6c757d;
+  margin-top: 1px;
+}
+
+/* ---------------------------------------------------------------
+   Dashboard stat cards
+--------------------------------------------------------------- */
+.okr-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.okr-stat-value--blue   { color: #0d6efd; }
+.okr-stat-value--green  { color: #198754; }
+.okr-stat-value--red    { color: #dc3545; }
+
+/* ---------------------------------------------------------------
+   Timeline: "Extended?" checkbox — force left-aligned, checkbox
+   immediately next to its label regardless of the parent row width.
+--------------------------------------------------------------- */
+.okr-extended-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 0;
+}
+
+.okr-extended-check .form-check-input {
+  float: none;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.okr-stat-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+/* ---------------------------------------------------------------
+   Dashboard closure bar chart
+--------------------------------------------------------------- */
+.okr-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.okr-bar-label {
+  width: 90px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.okr-bar-track {
+  flex: 1;
+  background: #e9ecef;
+  border-radius: 4px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.okr-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.okr-bar-count {
+  width: 35px;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------
+   Attachment dropzone
+--------------------------------------------------------------- */
+.okr-dropzone {
+  border: 2px dashed #ced4da;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  margin-top: 12px;
+}
+
+.okr-dropzone:hover,
+.okr-dropzone-active {
+  border-color: #0a5aa8;
+  background-color: #f0f7ff;
+}
+
+.okr-dropzone-text {
+  font-size: 13px;
+  color: #495057;
+}
+
+.okr-dropzone-text a {
+  color: #0a5aa8;
+  text-decoration: underline;
+}
+
+.okr-dropzone-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #adb5bd;
+}
+
+.okr-file-list {
+  margin-top: 8px;
+}
+
+.okr-file-row,
+.okr-attachment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
+
+.okr-file-name {
+  font-size: 13px;
+  color: #212529;
+  word-break: break-word;
+}
+
+.okr-file-size {
+  font-size: 11px;
+  color: #6c757d;
+  margin-left: auto;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.okr-file-remove {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------
+   Sidebar stack (create.php right column) - makes the last card
+   (Reference Link) grow to fill leftover vertical space, so its
+   bottom edge lines up with the bottom of the left column instead
+   of stopping short with dead whitespace beneath it.
+--------------------------------------------------------------- */
+.okr-sidebar-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.okr-sidebar-stack .okr-sidebar-grow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.okr-sidebar-stack .okr-sidebar-grow .okr-reflink-list {
+  flex: 1;
+}
+
+/* ---------------------------------------------------------------
+   Reference link rows
+--------------------------------------------------------------- */
+.okr-reflink-list {
+  margin-top: 2px;
+}
+
+.okr-reflink-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+.okr-reflink-row a {
+  color: #0a5aa8;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.okr-reflink-remove {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------
+   Status / type pills
+--------------------------------------------------------------- */
+.okr-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  line-height: 1.4;
+  color: #ffffff;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.okr-page-title .okr-pill {
+  margin-left: 8px;
+}
+
+.okr-pill-draft { background-color: #6c757d; }
+.okr-pill-active { background-color: #0d6efd; }
+.okr-pill-complete { background-color: #198754; }
+.okr-pill-complete-excellence { background-color: #0dcaf0; }
+.okr-pill-complete-extension { background-color: #6610f2; }
+.okr-pill-extend { background-color: #fd7e14; }
+.okr-pill-suspended { background-color: #e11d48; }
+.okr-pill-fail { background-color: #dc3545; }
+
+/* OKR ID badge, mirrors atem/view.php's .atem-id */
+.okr-id {
+  font-family: monospace;
+  font-size: 12px;
+  color: #0a5aa8;
+  background: #eef3f9;
+  border-radius: 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+.okr-deleted-banner {
+  background-color: #fdeaea;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+}
+
+.okr-deleted-banner .okr-card-hint {
+  color: #842029;
+  opacity: 0.8;
+  display: block;
+  margin-top: 2px;
+}
+
+.okr-row-deleted {
+  opacity: 0.6;
+}
+
+.okr-row-locked {
+  --bs-table-bg: #d1e7dd;
+  background-color: #d1e7dd;
+}
+
+/* ---------------------------------------------------------------
+   Card list table (mirrors atem/view.php's .atem-view-tbl/.atem-sortable)
+--------------------------------------------------------------- */
+.okr-view-tbl {
+  margin-bottom: 0;
+}
+
+.okr-view-tbl th {
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+  text-align: left;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.okr-view-tbl td {
+  font-size: 13px;
+  color: #212529;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.okr-view-tbl tbody tr:not(.okr-row-locked):not(.okr-row-deleted):nth-child(odd) {
+  background-color: #fbfcfe;
+}
+
+.okr-view-tbl tbody tr:not(.okr-row-locked):not(.okr-row-deleted):hover {
+  background-color: #eef6ff;
+}
+
+.okr-sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.okr-sortable::after {
+  content: '\2195';
+  margin-left: 5px;
+  font-size: 11px;
+  color: #ced4da;
+  vertical-align: middle;
+}
+
+.okr-sortable.okr-sort-asc::after {
+  content: '\2191';
+  color: #0d6efd;
+}
+
+.okr-sortable.okr-sort-desc::after {
+  content: '\2193';
+  color: #0d6efd;
+}
+
+.okr-sortable:hover {
+  color: #0a5aa8;
+}
+
+.okr-view-actions {
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------
+   Key Result Progress (nested task list, mirrors iidas's
+   project_detail.php Progression Task / Subtask widget)
+--------------------------------------------------------------- */
+.okr-kr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.okr-kr-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #e9ecef;
+  border-left: 4px solid #7c5cff;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.okr-kr-row--subtask {
+  margin-left: 32px;
+  background-color: #eef5fc;
+  border-color: #d7e8f7;
+  border-left: 4px solid #2f8fe0;
+}
+
+.okr-kr-num {
+  flex-shrink: 0;
+  width: 28px;
+  padding-top: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #7c5cff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.okr-kr-row--subtask .okr-kr-num {
+  color: #2f8fe0;
+}
+
+.okr-kr-drag-handle {
+  cursor: move;
+  color: #adb5bd;
+  font-size: 1.1em;
+  line-height: 1;
+  user-select: none;
+}
+
+.okr-kr-drag-handle:hover {
+  color: #2f8fe0;
+}
+
+.okr-kr-row--subtask.okr-kr-drag-over {
+  background-color: #e3f2fd;
+  border-top: 2px solid #2f8fe0;
+}
+
+.okr-kr-body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 2.2fr 0.8fr 0.8fr 1.2fr 0.9fr;
+  align-items: start;
+  gap: 8px;
+}
+
+.okr-kr-action-cell {
+  min-width: 0;
+}
+
+.okr-kr-col-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6c757d;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.okr-kr-action-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #212529;
+  overflow-wrap: break-word;
+}
+
+.okr-kr-action-creator {
+  font-size: 11px;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+.okr-kr-col {
+  min-width: 0;
+}
+
+.okr-kr-col-value {
+  font-size: 12px;
+  color: #212529;
+  overflow-wrap: break-word;
+}
+
+.okr-kr-col-value--muted {
+  color: #adb5bd;
+}
+
+.okr-kr-actions {
+  flex-shrink: 0;
+  width: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.okr-kr-actions-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.okr-kr-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  line-height: 1;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.okr-kr-icon-btn:hover {
+  opacity: 0.7;
+}
+
+.okr-kr-icon-btn:disabled {
+  color: #ced4da !important;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.okr-kr-icon-btn--edit {
+  color: #f39c12;
+}
+
+.okr-kr-icon-btn--delete {
+  color: #dc3545;
+}
+
+.okr-kr-icon-btn--add {
+  color: #0d6efd;
+}
+
+.okr-kr-icon-btn--atem {
+  color: #f39c12;
+}
+
+.okr-kr-empty {
+  font-size: 12px;
+  color: #adb5bd;
+  font-style: italic;
+  text-align: center;
+  padding: 16px 0;
+}
+
+.okr-kr-atem-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background-color: #fff3e0;
+  border: 1px solid #ffe0b2;
+  font-size: 11px;
+  color: #b8720a;
+}
+
+.okr-kr-atem-badge a {
+  color: #b8720a;
+  font-weight: 600;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.okr-kr-atem-badge a:hover {
+  text-decoration: underline;
+}
+
+.okr-kr-atem-unlink {
+  cursor: pointer;
+  color: #e53935;
+  font-weight: bold;
+}
+
+.okr-kr-atem-list {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+}
+
+.okr-kr-atem-row {
+  padding: 8px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 13px;
+}
+
+.okr-kr-atem-row:last-child {
+  border-bottom: none;
+}
+
+.okr-kr-atem-row:hover {
+  background-color: #f8f9fa;
+}
+
+.okr-kr-atem-row-title {
+  font-weight: 500;
+  color: #212529;
+}
+
+.okr-kr-atem-row-id {
+  font-weight: 400;
+  color: #6c757d;
+}
+
+.okr-kr-atem-row-meta {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.okr-kr-atem-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #adb5bd;
+  font-size: 11px;
+  margin: 10px 0;
+}
+
+.okr-kr-atem-divider::before,
+.okr-kr-atem-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.okr-kr-atem-divider::before {
+  margin-right: 8px;
+}
+
+.okr-kr-atem-divider::after {
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .okr-kr-body {
+    grid-template-columns: 1fr;
+  }
+
+  .okr-kr-actions {
+    width: auto;
+  }
+
+  .okr-kr-row--subtask {
+    margin-left: 12px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Chat Box (per-card discussion thread, mirrors ATEM's Chat Box)
+--------------------------------------------------------------- */
+.okr-chat-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 4px 2px;
+}
+
+.okr-chat-bubble {
+  align-self: flex-start;
+  max-width: 80%;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  padding: 8px 10px;
+}
+
+.okr-chat-bubble-mine {
+  align-self: flex-end;
+  background-color: #eef5ff;
+  border-color: #d7e8fb;
+}
+
+.okr-chat-bubble-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 4px;
+}
+
+.okr-chat-bubble-time {
+  white-space: nowrap;
+}
+
+.okr-chat-bubble-body {
+  font-size: 13px;
+  color: #212529;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.okr-chat-bubble-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.okr-chat-edit-btn,
+.okr-chat-unsend-btn,
+.okr-chat-save-btn,
+.okr-chat-cancel-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+.okr-chat-unsend-btn {
+  color: #e53935;
+}
+
+.okr-chat-edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.okr-chat-edit-textarea {
+  width: 100%;
+  font-size: 13px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 6px 8px;
+  resize: vertical;
+}
+
+.okr-chat-composer {
+  margin-top: 12px;
+}
+
+.okr-chat-composer-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------------------------
+   Suspend / Appeal / Force Terminate notice
+--------------------------------------------------------------- */
+.okr-alert-notice {
+  background-color: #fff3cd;
+  border: 1px solid #ffe69c;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #664d03;
+}
+
+/* Locks a whole edit.php section (Attachment/Reference Link/Key Result
+   Progress/Owner(s)/Timeline) while the OKR is suspended - only the
+   Objective field stays editable. Mirrors ATEM's suspended-edit lock
+   (atem/js/edit.js's applyReadMode), applied per-section instead of the
+   whole form since Objective must stay interactive. */
+.okr-suspend-locked {
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* Compact variant - a small inline hint rather than a full-width banner. */
+.okr-alert-notice.okr-alert-notice-sm {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.okr-alert-notice-meta {
+  display: block;
+  font-size: 12px;
+  color: #8a6d3b;
+  margin-top: 2px;
+}
+
+.okr-alert-notice-countdown {
+  background-color: #ffe69c;
+  border: 1px solid #ffd452;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #664d03;
+}
+
+/* ---------------------------------------------------------------
+   Notification bell (navbar)
+--------------------------------------------------------------- */
+.okr-notif-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 10px;
+  line-height: 1;
+  padding: 2px 5px;
+  min-width: 16px;
+  text-align: center;
+}
+
+.okr-hidden {
+  display: none !important;
+}
+
+.okr-notif-menu {
+  width: 320px;
+  max-width: 90vw;
+  padding: 0;
+}
+
+.okr-notif-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.okr-notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.okr-notif-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: #adb5bd;
+}
+
+.okr-notif-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.okr-notif-item:hover {
+  background-color: #f8f9fa;
+}
+
+.okr-notif-item-unread {
+  background-color: #eef5ff;
+}
+
+.okr-notif-item-time {
+  font-size: 11px;
+  color: #adb5bd;
+  margin-top: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Responsive
+--------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .okr-span-8,
+  .okr-span-4 {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 768px) {
+  .okr-card {
+    padding: 1rem;
+  }
+
+  .okr-container {
+    padding: 10px 15px 25px 10px;
+  }
+}
